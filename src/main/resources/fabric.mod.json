@@ -3,13 +3,14 @@
 	"id": "electric-mace",
 	"version": "${version}",
 	"name": "Electric mace",
-	"description": "This is an example description! Tell everyone what your mod is about!",
+	"description": "Adds the possibility of enchanting the new Mace with Channeling so that when we hit a mob from above it will be struck by lightning if it rains ",
 	"authors": [
 		"anvian"
 	],
 	"contact": {
-		"homepage": "https://fabricmc.net/",
-		"sources": "https://github.com/FabricMC/fabric-example-mod"
+		"homepage": "https://modrinth.com/project/electric-mace",
+		"sources": "https://github.com/anviaan/ElectricMace",
+		"issues": "https://github.com/anviaan/ElectricMace/issues"
 	},
 	"license": "GPL-3.0",
 	"icon": "assets/electric-mace/icon.png",
