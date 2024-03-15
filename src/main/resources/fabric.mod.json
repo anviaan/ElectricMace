@@ -1,0 +1,34 @@
+{
+	"schemaVersion": 1,
+	"id": "electric-mace",
+	"version": "${version}",
+	"name": "Electric mace",
+	"description": "This is an example description! Tell everyone what your mod is about!",
+	"authors": [
+		"anvian"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "GPL-3.0",
+	"icon": "assets/electric-mace/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.anvian.electricmace.ElectricMace"
+		]
+	},
+	"mixins": [
+		"electric-mace.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.7",
+		"minecraft": "~1.20.4",
+		"java": ">=17",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
