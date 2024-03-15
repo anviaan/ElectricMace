@@ -3,7 +3,8 @@
 	"package": "net.anvian.electricmace.mixin",
 	"compatibilityLevel": "JAVA_17",
 	"mixins": [
-		"ChannelingEnchantmentMixin"
+		"ChannelingEnchantmentMixin",
+		"MaceMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
