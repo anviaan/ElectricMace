@@ -1,6 +1,5 @@
 package net.anvian.electricmace.mixin;
 
-import net.minecraft.class_9362;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
@@ -8,6 +7,7 @@ import net.minecraft.entity.LightningEntity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.MaceItem;
 import net.minecraft.particle.ParticleTypes;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -20,13 +20,12 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.List;
 
-@Mixin(class_9362.class)
+@Mixin(MaceItem.class)
 public class MaceMixin {
-
     @Inject(method = "postHit", at = @At("HEAD"), cancellable = true)
     private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
         if (attacker instanceof ServerPlayerEntity serverPlayerEntity) {
-            if (serverPlayerEntity.fallDistance > 1.5f && EnchantmentHelper.getLevel(Enchantments.CHANNELING, stack) > 0) {
+            if (serverPlayerEntity.fallDistance > 1.5f && EnchantmentHelper.getLevel(Enchantments.CHANNELING, stack) > 0  && !serverPlayerEntity.isFallFlying()) {
                 ServerWorld serverWorld = (ServerWorld) attacker.getWorld();
                 if (serverWorld.isRaining() || serverWorld.isThundering()) {
                     Box searchArea = new Box(target.getBlockPos()).expand(5.0, 5.0, 5.0);
