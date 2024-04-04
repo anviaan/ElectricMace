@@ -4,10 +4,10 @@ Electric Mace is a mod for the latest snapshot of Minecraft **24w11a**, this mod
 
 ## Prerequisites
 
-- Java 17 or higher
-- Minecraft 24w13a
-- Fabric Loader 0.15.7 or higher
-- Fabric API 0.96.13+1.20.5 or higher
+- Java 21 or higher
+- Minecraft 24w14a
+- Fabric Loader 0.15.9 or higher
+- Fabric API 0.96.14+1.20.5 or higher
 
 ## Issues and Suggestions
 Send your issues and suggestions to the [issues page](https://github.com/anviaan/ElectricMace/issues)
