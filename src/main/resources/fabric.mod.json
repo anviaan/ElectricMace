@@ -1,8 +1,8 @@
 {
 	"schemaVersion": 1,
-	"id": "electric-mace",
+	"id": "electricmace",
 	"version": "${version}",
-	"name": "Electric mace",
+	"name": "Electric Mace",
 	"description": "Adds the possibility of enchanting the new Mace with Channeling so that when we hit a mob from above it will be struck by lightning if it rains ",
 	"authors": [
 		"anvian"
@@ -13,19 +13,22 @@
 		"issues": "https://github.com/anviaan/ElectricMace/issues"
 	},
 	"license": "GPL-3.0",
-	"icon": "assets/electric-mace/icon.png",
+	"icon": "assets/electricmace/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [
 			"net.anvian.electricmace.ElectricMace"
+		],
+		"fabric-datagen": [
+			"net.anvian.electricmace.ElectricMaceDataGenerator"
 		]
 	},
 	"mixins": [
-		"electric-mace.mixins.json"
+		"electricmace.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.15.9",
-		"minecraft": "~1.20.4",
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
 		"java": ">=21",
 		"fabric-api": "*"
 	},

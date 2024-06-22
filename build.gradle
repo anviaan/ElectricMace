@@ -11,10 +11,10 @@ base {
 }
 
 repositories {
-    maven {
-        name = "Mod Menu"
-        url = "https://maven.terraformersmc.com/releases/"
-    }
+}
+
+fabricApi {
+    configureDataGeneration()
 }
 
 dependencies {
@@ -23,8 +23,6 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
 
     modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
-
-    //modLocalRuntime("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 processResources {
@@ -54,7 +52,8 @@ jar {
 
 publishing {
     publications {
-        mavenJava(MavenPublication) {
+        create("mavenJava", MavenPublication) {
+            artifactId = project.archives_base_name
             from components.java
         }
     }
