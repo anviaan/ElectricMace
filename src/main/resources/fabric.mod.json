@@ -3,7 +3,7 @@
 	"id": "electricmace",
 	"version": "${version}",
 	"name": "Electric Mace",
-	"description": "Adds the possibility of enchanting the new Mace with Channeling so that when we hit a mob from above it will be struck by lightning if it rains ",
+	"description": "Adds the possibility of enchanting the new Mace with Channeling so that when we hit a mob from above it will be hit by lightning if it thunders.",
 	"authors": [
 		"anvian"
 	],

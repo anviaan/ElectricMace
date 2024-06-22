@@ -29,7 +29,7 @@ public class MaceMixin {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
         if (attacker instanceof ServerPlayerEntity && MaceItem.shouldDealAdditionalDamage(attacker) && EnchantmentHelper.hasAnyEnchantmentsIn(stack, ModTags.Enchantments.ELECTRIC_MACE)) {
             ServerWorld serverWorld = (ServerWorld) attacker.getWorld();
-            if (serverWorld.isRaining() || serverWorld.isThundering()) {
+            if (serverWorld.isThundering()) {
                 Box searchArea = new Box(target.getBlockPos()).expand(5.0, 5.0, 5.0);
                 List<LivingEntity> nearbyMobs = getNearbyMobs(serverWorld, searchArea);
                 if (!nearbyMobs.isEmpty()) {
