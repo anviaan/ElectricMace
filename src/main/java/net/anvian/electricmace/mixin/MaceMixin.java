@@ -1,7 +1,7 @@
 package net.anvian.electricmace.mixin;
 
+import net.anvian.electricmace.util.ModTags;
 import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.entity.LightningEntity;
@@ -27,7 +27,7 @@ public class MaceMixin {
     @Inject(method = "postHit", at = @At("HEAD"), cancellable = true)
     private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
         stack.damage(1, attacker, EquipmentSlot.MAINHAND);
-        if (attacker instanceof ServerPlayerEntity && MaceItem.shouldDealAdditionalDamage((ServerPlayerEntity) attacker) && EnchantmentHelper.getLevel(Enchantments.CHANNELING, stack) > 0) {
+        if (attacker instanceof ServerPlayerEntity && MaceItem.shouldDealAdditionalDamage(attacker) && EnchantmentHelper.hasAnyEnchantmentsIn(stack, ModTags.Enchantments.ELECTRIC_MACE)) {
             ServerWorld serverWorld = (ServerWorld) attacker.getWorld();
             if (serverWorld.isRaining() || serverWorld.isThundering()) {
                 Box searchArea = new Box(target.getBlockPos()).expand(5.0, 5.0, 5.0);
