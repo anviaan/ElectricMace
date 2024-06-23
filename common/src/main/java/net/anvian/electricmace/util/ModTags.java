@@ -8,7 +8,7 @@ import net.minecraft.world.item.enchantment.Enchantment;
 
 public class ModTags {
     public static class Enchantments {
-        public static final TagKey<Enchantment> ELECTRIC_MACE = createTag("electric_mace");
+        public static final TagKey<Enchantment> ELECTRICMACE_ENCHANTMENTS = createTag("electricmace_enchantments");
 
         private static TagKey<Enchantment> createTag(String name) {
             return TagKey.create(Registries.ENCHANTMENT, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, name));

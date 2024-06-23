@@ -27,7 +27,7 @@ public class MaceMixin {
     @Inject(method = "hurtEnemy", at = @At("HEAD"), cancellable = true)
     private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        if (attacker instanceof ServerPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRIC_MACE)) {
+        if (attacker instanceof ServerPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
             ServerLevel serverWorld = (ServerLevel) attacker.level();
             if (serverWorld.isThundering()) {
                 AABB searchArea = new AABB(target.blockPosition()).inflate(5.0, 5.0, 5.0);
