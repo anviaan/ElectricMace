@@ -108,6 +108,6 @@
   "slots": [
     "mainhand"
   ],
-  "supported_items": "#electricmace:enchantable/electricmace",
+  "supported_items": "#electricmace:enchantable/electric",
   "weight": 1
 }
