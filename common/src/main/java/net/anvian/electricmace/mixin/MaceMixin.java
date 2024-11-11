@@ -8,10 +8,7 @@ import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
-import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.LightningBolt;
-import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MaceItem;
@@ -71,7 +68,7 @@ public class MaceMixin {
 
     @Unique
     private void electricMace$spawnLightningBolt(ServerLevel serverLevel, LivingEntity mob) {
-        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel);
+        LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.SPAWN_ITEM_USE);
         if (lightningBolt != null) {
             lightningBolt.moveTo(mob.getX(), mob.getY(), mob.getZ());
             serverLevel.addFreshEntity(lightningBolt);
