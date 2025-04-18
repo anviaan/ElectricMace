@@ -29,6 +29,10 @@ repositories {
         name = 'BlameJared'
         url = 'https://maven.blamejared.com'
     }
+    maven {
+        name = 'Repsy Anvian'
+        url = 'https://repo.repsy.io/mvn/anvian/anvians-lib'
+    }
 }
 
 // Declare capabilities on the outgoing configurations.
