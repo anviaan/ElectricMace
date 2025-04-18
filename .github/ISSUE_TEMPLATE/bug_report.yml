@@ -19,8 +19,8 @@ body:
       label: Loader
       multiple: false
       options:
-        - forge
         - fabric
+        - neoforge
     validations:
       required: true
 
@@ -41,6 +41,7 @@ body:
         - "1.21.1"
         - "1.21.2"
         - "1.21.3"
+        - "1.21.4"
     validations:
       required: true
 
