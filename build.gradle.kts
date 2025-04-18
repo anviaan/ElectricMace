@@ -4,7 +4,7 @@ plugins {
 
 val MOD_VERSION = project.property("version") as String
 val ARCHIVE_NAME = project.property("mod_name") as String
-val COMPATIBLE_VERSIONS = "[1.21.2, 1.22)"
+val COMPATIBLE_VERSIONS = project.property("minecraft_version_range") as String
 
 tasks.register("printEnv") {
     doLast {

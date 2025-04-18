@@ -3,6 +3,8 @@ package net.anvian.electricmace.platform;
 import net.anvian.electricmace.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 
+import java.nio.file.Path;
+
 public class FabricPlatformHelper implements IPlatformHelper {
 
     @Override
@@ -11,14 +13,12 @@ public class FabricPlatformHelper implements IPlatformHelper {
     }
 
     @Override
-    public boolean isModLoaded(String modId) {
-
-        return FabricLoader.getInstance().isModLoaded(modId);
+    public boolean isDevelopmentEnvironment() {
+        return FabricLoader.getInstance().isDevelopmentEnvironment();
     }
 
     @Override
-    public boolean isDevelopmentEnvironment() {
-
-        return FabricLoader.getInstance().isDevelopmentEnvironment();
+    public Path getGameConfigDirectory() {
+        return FabricLoader.getInstance().getConfigDir();
     }
 }
