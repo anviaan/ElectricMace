@@ -19,14 +19,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
 @Mixin(MaceItem.class)
 public class MaceMixin {
     @Inject(method = "hurtEnemy", at = @At("HEAD"), cancellable = true)
-    private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
+    private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfo cir) {
         stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
         if (attacker instanceof ServerPlayer serverPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
             ServerLevel serverWorld = (ServerLevel) attacker.level();
@@ -52,7 +52,7 @@ public class MaceMixin {
                 }
             }
         }
-        cir.setReturnValue(true);
+        cir.cancel();
     }
 
     @Unique
@@ -62,7 +62,7 @@ public class MaceMixin {
 
     @Unique
     private void electricMace$damageAndSpawnParticles(Level level, ServerLevel serverLevel, LivingEntity mob) {
-        mob.hurt(level.damageSources().lightningBolt(), 3.0f);
+        mob.hurtServer(serverLevel, level.damageSources().lightningBolt(), 3.0f);
         serverLevel.sendParticles(ParticleTypes.FLASH, mob.getX(), mob.getY(), mob.getZ(), 10, 0.5, 0.5, 0.5, 0.0);
     }
 
@@ -70,7 +70,7 @@ public class MaceMixin {
     private void electricMace$spawnLightningBolt(ServerLevel serverLevel, LivingEntity mob) {
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel, EntitySpawnReason.SPAWN_ITEM_USE);
         if (lightningBolt != null) {
-            lightningBolt.moveTo(mob.getX(), mob.getY(), mob.getZ());
+            lightningBolt.dismountTo(mob.getX(), mob.getY(), mob.getZ());
             serverLevel.addFreshEntity(lightningBolt);
         }
     }
