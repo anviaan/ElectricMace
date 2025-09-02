@@ -2,6 +2,17 @@ plugins {
     id("org.jetbrains.gradle.plugin.idea-ext") version ("1.1.7")
 }
 
+subprojects {
+    repositories {
+        maven {
+            url = uri("https://libraries.minecraft.net")
+            content {
+                includeModule("org.lwjgl", "lwjgl-freetype")
+            }
+        }
+    }
+}
+
 val MOD_VERSION = project.property("version") as String
 val ARCHIVE_NAME = project.property("mod_name") as String
 val COMPATIBLE_VERSIONS = project.property("minecraft_version_range") as String
