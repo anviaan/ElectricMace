@@ -1,18 +1,12 @@
 package net.anvian.electricmace.mixin;
 
 import net.anvian.electricmace.util.ModTags;
-import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
-import net.minecraft.network.protocol.game.ClientboundSetEntityMotionPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
-import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.MaceItem;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -28,39 +22,26 @@ import java.util.List;
 
 @Mixin(MaceItem.class)
 public class MaceMixin {
-    @Inject(method = "hurtEnemy", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "hurtEnemy", at = @At("TAIL"))
     private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
-        stack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-        if (attacker instanceof ServerPlayer serverPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
+        if (attacker instanceof ServerPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
             ServerLevel serverWorld = (ServerLevel) attacker.level();
             if (serverWorld.isThundering()) {
                 AABB searchArea = new AABB(target.blockPosition()).inflate(5.0, 5.0, 5.0);
-                List<LivingEntity> nearbyMobs = electricMace$getNearbyMobs(serverWorld, searchArea);
+                List<LivingEntity> nearbyMobs = electricMace$getNearbyMobs(serverWorld, searchArea, attacker);
                 if (!nearbyMobs.isEmpty()) {
                     for (LivingEntity mob : nearbyMobs) {
                         electricMace$damageAndSpawnParticles(attacker.level(), serverWorld, mob);
                         electricMace$spawnLightningBolt(serverWorld, mob);
                     }
                 }
-
-                serverPlayer.setIgnoreFallDamageFromCurrentImpulse(true);
-                serverPlayer.setDeltaMovement(serverPlayer.getDeltaMovement().with(Direction.Axis.Y, 0.01F));
-                serverPlayer.connection.send(new ClientboundSetEntityMotionPacket(serverPlayer));
-                if (target.onGround()) {
-                    serverPlayer.setSpawnExtraParticlesOnFall(true);
-                    SoundEvent $$5 = serverPlayer.fallDistance > 5.0F ? SoundEvents.MACE_SMASH_GROUND_HEAVY : SoundEvents.MACE_SMASH_GROUND;
-                    serverWorld.playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), $$5, serverPlayer.getSoundSource(), 1.0F, 1.0F);
-                } else {
-                    serverWorld.playSound(null, serverPlayer.getX(), serverPlayer.getY(), serverPlayer.getZ(), SoundEvents.MACE_SMASH_AIR, serverPlayer.getSoundSource(), 1.0F, 1.0F);
-                }
             }
         }
-        cir.setReturnValue(true);
     }
 
     @Unique
-    private List<LivingEntity> electricMace$getNearbyMobs(Level level, AABB searchArea) {
-        return level.getEntitiesOfClass(LivingEntity.class, searchArea, entity -> !(entity instanceof Player));
+    private List<LivingEntity> electricMace$getNearbyMobs(Level level, AABB searchArea, LivingEntity attacker) {
+        return level.getEntitiesOfClass(LivingEntity.class, searchArea, entity -> entity != attacker);
     }
 
     @Unique
@@ -73,7 +54,7 @@ public class MaceMixin {
     private void electricMace$spawnLightningBolt(ServerLevel serverLevel, LivingEntity mob) {
         LightningBolt lightningBolt = EntityType.LIGHTNING_BOLT.create(serverLevel);
         if (lightningBolt != null) {
-            lightningBolt.moveTo(mob.getX(), mob.getY(), mob.getZ());
+            lightningBolt.dismountTo(mob.getX(), mob.getY(), mob.getZ());
             serverLevel.addFreshEntity(lightningBolt);
         }
     }
