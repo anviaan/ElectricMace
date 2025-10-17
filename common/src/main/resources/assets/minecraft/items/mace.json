@@ -1,0 +1,25 @@
+{
+  "model": {
+    "type": "minecraft:composite",
+    "models": [
+      {
+        "type": "minecraft:condition",
+        "property": "minecraft:component",
+        "predicate": "minecraft:enchantments",
+        "value": [
+          {
+            "enchantments": "minecraft:channeling"
+          }
+        ],
+        "on_true": {
+          "type": "minecraft:model",
+          "model": "electricmace:item/mace"
+        },
+        "on_false": {
+          "type": "minecraft:model",
+          "model": "minecraft:item/mace"
+        }
+      }
+    ]
+  }
+}
