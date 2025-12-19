@@ -1,6 +1,7 @@
 package net.anvian.electricmace.mixin;
 
 import net.anvian.electricmace.util.ModTags;
+import net.minecraft.core.particles.ColorParticleOption;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -48,7 +49,8 @@ public class MaceMixin {
     @Unique
     private void electricMace$damageAndSpawnParticles(Level level, ServerLevel serverLevel, LivingEntity mob) {
         mob.hurtServer(serverLevel, level.damageSources().lightningBolt(), 3.0f);
-        serverLevel.sendParticles(ParticleTypes.FLASH, mob.getX(), mob.getY(), mob.getZ(), 10, 0.5, 0.5, 0.5, 0.0);
+        int color = 0xFFFF00;
+        serverLevel.sendParticles(ColorParticleOption.create(ParticleTypes.FLASH, color), mob.getX(), mob.getY(), mob.getZ(), 10, 0.5, 0.5, 0.5, 0.0);
     }
 
     @Unique
