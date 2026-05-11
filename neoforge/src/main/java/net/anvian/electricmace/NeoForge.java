@@ -7,7 +7,7 @@ import net.neoforged.fml.common.Mod;
 public class NeoForge {
 
     public NeoForge(IEventBus eventBus) {
-        Constants.LOG.info("Hello from " + Constants.MOD_ID + " (Fabric)");
+        Constants.LOG.info("Hello from " + Constants.MOD_ID + " (NeoForge)");
         Common.init();
     }
 }
