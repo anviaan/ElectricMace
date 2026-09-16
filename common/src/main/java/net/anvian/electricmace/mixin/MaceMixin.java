@@ -16,14 +16,14 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.List;
 
 @Mixin(MaceItem.class)
 public class MaceMixin {
-    @Inject(method = "hurtEnemy", at = @At("TAIL"))
-    private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "postHurtEnemy", at = @At("HEAD"))
+    private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfo ci) {
         if (attacker instanceof ServerPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
             ServerLevel serverWorld = (ServerLevel) attacker.level();
             if (serverWorld.isThundering()) {
