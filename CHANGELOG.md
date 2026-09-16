@@ -1,1 +1,1 @@
-- Update Anvian's Lib
+- Fixed Channeling lightning not triggering after a falling mace hit during thunderstorms.
