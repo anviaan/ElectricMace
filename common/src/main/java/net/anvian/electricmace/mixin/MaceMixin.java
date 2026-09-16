@@ -23,7 +23,7 @@ import java.util.List;
 
 @Mixin(MaceItem.class)
 public class MaceMixin {
-    @Inject(method = "hurtEnemy", at = @At("TAIL"))
+    @Inject(method = "postHurtEnemy", at = @At("HEAD"))
     private void inject(ItemStack stack, LivingEntity target, LivingEntity attacker, CallbackInfo ci) {
         if (attacker instanceof ServerPlayer && MaceItem.canSmashAttack(attacker) && EnchantmentHelper.hasTag(stack, ModTags.Enchantments.ELECTRICMACE_ENCHANTMENTS)) {
             ServerLevel serverWorld = (ServerLevel) attacker.level();
