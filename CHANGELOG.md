@@ -1,1 +1,1 @@
-- Port to 1.21.11
+- Fixed Channeling lightning not triggering after a falling mace hit during thunderstorms.
