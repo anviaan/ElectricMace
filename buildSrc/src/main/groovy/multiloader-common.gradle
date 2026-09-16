@@ -31,7 +31,7 @@ repositories {
     }
     maven {
         name = 'Repsy Anvian'
-        url = 'https://repo.repsy.io/mvn/anvian/anvians-lib'
+        url = 'https://maven.anvian.net/releases'
     }
 }
 
