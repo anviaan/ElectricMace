@@ -1,1 +1,1 @@
-- Port to 26.1
+- Fixed Channeling lightning not triggering after a falling mace hit during thunderstorms.
