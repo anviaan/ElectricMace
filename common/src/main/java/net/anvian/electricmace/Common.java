@@ -5,8 +5,8 @@ import net.anvian.anvianslib.util.LibUtil;
 public class Common {
     public static void init() {
         try {
-            LibUtil.setupTelemetry(Constants.MOD_ID, "1.10.2");
-        } catch (LinkageError error) {
+            LibUtil.setupTelemetry(Constants.MOD_ID, "1.10.3");
+        } catch (LinkageError _) {
             Constants.LOG.warn("Skipping telemetry because Anvians Lib is incompatible with this Minecraft version");
         }
     }

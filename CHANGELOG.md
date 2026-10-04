@@ -1,1 +1,1 @@
-- Fixed Channeling lightning not triggering after a falling mace hit during thunderstorms.
+- Minecraft 26.3 support 
